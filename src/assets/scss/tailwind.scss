@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "./base/costum-base.scss";
+
+@import "tailwindcss/components";
+@import "./components/costum-component.scss";
+@import "./pages/auth.scss";
+
+@import "tailwindcss/utilities";
+@import "./utils/costume-utils.scss";
