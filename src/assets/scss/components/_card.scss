@@ -1,0 +1,21 @@
+.tw-card {
+  height: 470px;
+
+  @apply flex flex-col shadow-md rounded;
+
+  & .tw-btn-full {
+    @apply w-full;
+  }
+
+  & .tw-card-title {
+    @apply text-3xl font-medium text-gray-900 my-0;
+  }
+
+  & .tw-card-text {
+    @apply font-normal my-0;
+  }
+
+  & .tw-card-body {
+    @apply px-5 py-6 w-full h-screen;
+  }
+}

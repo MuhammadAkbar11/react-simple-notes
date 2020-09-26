@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthCard from "./AuthCard";
 
 function RegisterForms() {
   return (
-    <>
+    <AuthCard>
       <div className=" w-full h-full  flex justify-center flex-col items-center ">
-        <div className=" w-full ">
+        {/* <div className=" w-full ">
+
           <input
             type="text"
             className="input--control   "
@@ -25,7 +27,7 @@ function RegisterForms() {
             className="input--control   "
             placeholder="Repeat Your Password"
           />
-        </div>
+        </div> */}
         <div className=" w-full mt-5">
           <button className="btn btn-indigo w-full ">Register</button>
           <br />
@@ -37,7 +39,7 @@ function RegisterForms() {
           </p>
         </div>
       </div>
-    </>
+    </AuthCard>
   );
 }
 

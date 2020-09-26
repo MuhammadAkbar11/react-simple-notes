@@ -607,14 +607,14 @@ video {
   }
 }
 
-.btn {
+.tw-btn {
   font-weight: 700;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 0.25rem;
-  &.btn-indigo {
+  &.tw-btn-indigo {
     --bg-opacity: 1;
     background-color: #5a67d8;
     background-color: rgba(90, 103, 216, var(--bg-opacity));
@@ -637,7 +637,7 @@ video {
   }
 }
 
-.input--control {
+.tw-input {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.5rem;
@@ -671,29 +671,46 @@ video {
   }
 }
 
+.tw-card {
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  & .tw-btn-full {
+    width: 100%;
+  }
+  & .tw-card-title {
+    font-size: 1.875rem;
+    font-weight: 500;
+    --text-opacity: 1;
+    color: #1a202c;
+    color: rgba(26, 32, 44, var(--text-opacity));
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  & .tw-card-text {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  & .tw-card-body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    width: 100%;
+    height: 100vh;
+  }
+}
+
 .auth--wrapper {
   width: 100%;
   height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  vertical-align: middle;
-  .auth--card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    --bg-opacity: 1;
-    background-color: #f7fafc;
-    background-color: rgba(247, 250, 252, var(--bg-opacity));
-    margin-top: auto;
-    margin-bottom: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 1.25rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-  }
+  align-items: center;
 }
 
 .space-y-0 > :not(template) ~ :not(template){
