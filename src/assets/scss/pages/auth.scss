@@ -1,0 +1,7 @@
+.auth--wrapper {
+  @apply w-full h-screen overflow-hidden flex justify-center align-middle;
+
+  .auth--card {
+    @apply relative flex flex-col justify-center  bg-gray-100  my-auto px-6 pt-5 rounded-md font-semibold;
+  }
+}
