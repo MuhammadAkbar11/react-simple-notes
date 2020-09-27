@@ -1,0 +1,7 @@
+.tw-alert {
+  @apply w-full py-2 px-4 bg-error text-white  rounded-sm my-3 flex justify-center;
+
+  &.tw-alert-success {
+    @apply bg-green-500;
+  }
+}

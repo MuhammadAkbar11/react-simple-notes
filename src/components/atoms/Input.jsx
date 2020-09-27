@@ -7,7 +7,9 @@ function Input(props) {
       type={props.type}
       name={props.name}
       placeholder={props.placeholder}
+      onChange={props.onChange}
       {...props.atributes}
+      value={props.value}
     />
   );
 }
