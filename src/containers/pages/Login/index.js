@@ -3,13 +3,63 @@ import CardBody from "components/molecules/Cards/CardBody";
 import Card from "components/molecules/Cards/Card";
 import CardTitle from "components/atoms/CardTitle";
 import CardText from "components/atoms/CardText";
-import FormsGroup from "components/molecules/FormsGroup";
-import Input from "components/atoms/Input";
-import Button from "components/atoms/Button";
-import { Link } from "react-router-dom";
+import FormsLogin from "containers/organims/login/FormsLogin";
+
+import { connect } from "react-redux";
+import ReduxActionTypes from "config/redux/actions/Redux.actionTypes";
+import { changePopup } from "config/redux/actions/Redux.actions";
 
 export class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: "",
+      loading: false,
+    };
+  }
+
+  setLoading = status => {
+    this.setState({ loading: status });
+  };
+
+  componentDidMount() {
+    document.title = "Simple Note | Login";
+  }
+
+  componentWillUnmount() {
+    document.title = "Simple Note";
+  }
+
+  handleInputChange = e => {
+    const event = e.target;
+    const name = event.name;
+    const value = event.value;
+
+    this.setState(
+      {
+        ...this.state,
+        [name]: value,
+      },
+      () => {
+        if (this.props.popUp === true)
+          this.props.actions.changePopup("", false);
+      }
+    );
+  };
+
+  submitLogin = e => {
+    e.preventDefault();
+    const { email, password } = this.state;
+    // if (email === "" || password === "") {
+    //   this.props.actions.changePopup("Field Email and Password is empty", true);
+    // }
+  };
+
   render() {
+    const { email, password } = this.state;
+    const { store } = this.props;
     return (
       <div className="auth--wrapper bg-gray-100">
         <div className=" flex flex-wrap justify-center w-full ">
@@ -22,24 +72,18 @@ export class Login extends Component {
                 <CardText className=" text-sm text-gray-700 ">Login</CardText>
               </div>
               <div className="w-full h-full flex flex-col justify-center items-center ">
-                <FormsGroup>
-                  <Input placeholder="Enter Your Email" />
-                </FormsGroup>
-                <FormsGroup className="mt-4">
-                  <Input placeholder="Enter Your Password" />
-                </FormsGroup>
-                <FormsGroup className="mt-4">
-                  <Button className="tw-btn-indigo tw-btn-full ">Login</Button>
-                  <p className="text-sm mt-4 text-center">
-                    Don't have account?{" "}
-                    <Link
-                      className="text-indigo-400 font-light hover:text-indigo-600"
-                      to="/register"
-                    >
-                      Registration now!
-                    </Link>
-                  </p>
-                </FormsGroup>
+                {store.popUp ? (
+                  <div className="my-3">
+                    <h3 className="text-red-600">{store.errorMessage}</h3>
+                  </div>
+                ) : null}
+                <br />
+                <FormsLogin
+                  form={{ email, password }}
+                  handleInputChange={this.handleInputChange}
+                  submit={this.submitLogin}
+                  loading={this.state.loading}
+                />
               </div>
               <div className="w-full h-auto flex flex-col justify-end items-center pt-4">
                 <small className="text-gray-600">Muhammad Akbar 2020</small>
@@ -51,4 +95,24 @@ export class Login extends Component {
     );
   }
 }
-export default Login;
+const mapStateToProps = state => {
+  return {
+    store: {
+      ...state,
+    },
+  };
+};
+
+const mapDispatchToProops = dispatch => {
+  return {
+    actions: {
+      changePopup: (text, status) =>
+        dispatch({
+          type: ReduxActionTypes.SHOW_POPUP,
+          value: { text: text, status: status },
+        }),
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProops)(Login);

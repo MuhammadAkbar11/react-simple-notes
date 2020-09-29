@@ -9,6 +9,7 @@ import FormsRegister from "containers/organims/register/FormsRegister";
 
 import { connect } from "react-redux";
 import ReduxActionTypes from "config/redux/actions/Redux.actionTypes";
+import { _ChangePopup } from "config/redux/actions/Redux.actions";
 
 export class Register extends Component {
   constructor(props) {
@@ -142,11 +143,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProops = dispatch => {
   return {
-    changePopup: (text, status) =>
-      dispatch({
-        type: ReduxActionTypes.SHOW_POPUP,
-        value: { text: text, status: status },
-      }),
+    changePopup: (text, status) => dispatch(_ChangePopup(text, status)),
   };
 };
 

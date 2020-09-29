@@ -1,7 +1,8 @@
-export const changePopup = (state, message = "opps", status = true) => {
-  if (state.popUp === false) {
-    return { ...state, popUp: status, errorMessage: message };
-  } else {
-    return { ...state, popUp: status, errorMessage: message };
-  }
+import ReduxActionTypes from "./Redux.actionTypes";
+
+export const _ChangePopup = (text, status) => dispatch => {
+  return dispatch({
+    type: ReduxActionTypes.SHOW_POPUP,
+    value: { text: text, status: status },
+  });
 };

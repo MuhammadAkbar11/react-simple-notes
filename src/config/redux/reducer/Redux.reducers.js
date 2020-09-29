@@ -1,11 +1,15 @@
 import ReduxActionTypes from "../actions/Redux.actionTypes";
-import * as Action from "config/redux/actions/Redux.actions";
+import * as TypesReducer from "./TypesReducer";
 
 import { globalState } from "../store/Redux.store";
 
 const ReduxReducer = (state = globalState, action) => {
   if (action.type === ReduxActionTypes.SHOW_POPUP) {
-    return Action.changePopup(state, action.value.text, action.value.status);
+    return TypesReducer.changePopup(
+      state,
+      action.value.text,
+      action.value.status
+    );
   }
 
   return state;
