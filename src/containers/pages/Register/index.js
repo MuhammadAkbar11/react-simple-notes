@@ -7,6 +7,9 @@ import CardText from "components/atoms/CardText";
 import firebase from "config/firebase/index.firebase";
 import FormsRegister from "containers/organims/register/FormsRegister";
 
+import { connect } from "react-redux";
+import ReduxActionTypes from "config/redux/actions/Redux.actionTypes";
+
 export class Register extends Component {
   constructor(props) {
     super(props);
@@ -23,15 +26,28 @@ export class Register extends Component {
     this.setState({ loading: status });
   };
 
+  componentDidMount() {
+    document.title = "Simple Note | Register";
+  }
+
+  componentWillUnmount() {
+    document.title = "Simple Note";
+  }
+
   handleInputChange = e => {
     const event = e.target;
     const name = event.name;
     const value = event.value;
 
-    this.setState({
-      ...this.state,
-      [name]: value,
-    });
+    this.setState(
+      {
+        ...this.state,
+        [name]: value,
+      },
+      () => {
+        if (this.props.popUp === true) this.props.changePopup("", false);
+      }
+    );
   };
 
   submitRegistration = e => {
@@ -40,7 +56,7 @@ export class Register extends Component {
     this.setLoading(true);
     if (password1 !== password2) {
       this.setLoading(false);
-      console.log("password doesn't match");
+      this.props.changePopup("Password doesn't match", true);
     } else {
       firebase
         .auth()
@@ -59,12 +75,19 @@ export class Register extends Component {
           const errorMessage = err.message;
           this.setLoading(false);
           if (err.code === "auth/email-already-in-use") {
-            this.setState({
-              email: "",
-              password1: "",
-              password2: "",
-            });
+            this.setState(
+              {
+                email: "",
+                password1: "",
+                password2: "",
+              },
+              () => {
+                this.props.changePopup(errorMessage, true);
+              }
+            );
           }
+
+          this.props.changePopup(errorMessage, true);
           console.log(errorCode, errorMessage);
         });
     }
@@ -72,6 +95,7 @@ export class Register extends Component {
 
   render() {
     const { email, password1, password2 } = this.state;
+
     return (
       <div className="auth--wrapper bg-gray-100">
         <div className=" flex flex-wrap justify-center w-full ">
@@ -86,6 +110,12 @@ export class Register extends Component {
                 </CardText>
               </div>
               <div className="w-full h-full flex flex-col justify-center items-center ">
+                {this.props.popUp ? (
+                  <div className="my-3">
+                    <h3 className="text-red-600">{this.props.errorMessage}</h3>
+                  </div>
+                ) : null}
+                <br />
                 <FormsRegister
                   form={{ email, password1, password2 }}
                   handleInputChange={this.handleInputChange}
@@ -103,4 +133,21 @@ export class Register extends Component {
     );
   }
 }
-export default Register;
+
+const mapStateToProps = state => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProops = dispatch => {
+  return {
+    changePopup: (text, status) =>
+      dispatch({
+        type: ReduxActionTypes.SHOW_POPUP,
+        value: { text: text, status: status },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProops)(Register);
