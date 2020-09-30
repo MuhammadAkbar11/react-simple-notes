@@ -7,7 +7,6 @@ import FormsLogin from "containers/organims/login/FormsLogin";
 
 import { connect } from "react-redux";
 import ReduxActionTypes from "config/redux/actions/Redux.actionTypes";
-import { changePopup } from "config/redux/actions/Redux.actions";
 
 export class Login extends Component {
   constructor(props) {
@@ -51,7 +50,8 @@ export class Login extends Component {
 
   submitLogin = e => {
     e.preventDefault();
-    const { email, password } = this.state;
+    // const { email, password } = this.state;
+    this.setLoading(true);
     // if (email === "" || password === "") {
     //   this.props.actions.changePopup("Field Email and Password is empty", true);
     // }

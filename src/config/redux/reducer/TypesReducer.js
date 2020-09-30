@@ -5,3 +5,10 @@ export const changePopup = (state, message = "opps", status = true) => {
     return { ...state, popUp: status, errorMessage: message };
   }
 };
+
+export const setLoading = (state, status) => {
+  return {
+    ...state,
+    isLoading: status,
+  };
+};

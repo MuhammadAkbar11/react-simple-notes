@@ -12,6 +12,10 @@ const ReduxReducer = (state = globalState, action) => {
     );
   }
 
+  if (action.type === ReduxActionTypes.SET_LOADING) {
+    return TypesReducer.setLoading(state, action.value.status);
+  }
+
   return state;
 };
 
