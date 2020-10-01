@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input(props) {
+const Input = React.forwardRef((props, ref) => {
   return (
     <input
       className="tw-input"
@@ -8,14 +8,18 @@ function Input(props) {
       name={props.name}
       placeholder={props.placeholder}
       onChange={props.onChange}
-      {...props.atributes}
       value={props.value}
+      ref={ref}
+      {...props.atributes}
     />
   );
-}
+});
 
 Input.defaultProps = {
   type: "text",
 };
 
-export default Input;
+const InputRef = Input;
+InputRef.displayName = "input";
+
+export default InputRef;

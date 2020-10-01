@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import Dashboard from "../Dashboard";
-import Login from "../Login";
-import Register from "../Register";
 import ReduxStore from "config/redux/store/Redux.store";
+import Registrations from "../Auth/Registrations";
+import Login from "../Auth/Login";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <>
           <Route path="/" exact component={Dashboard} />
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/registration" component={Registrations} />
         </>
       </Router>
     </Provider>
